@@ -1,0 +1,13 @@
+
+https://stripe.com/
+
+4242 4242 4242 4242     01/29   333     91020
+
+
+brew install mariadb
+mysql.server start
+brew services start mariadb
+mysql
+sudo mysql -u root
+
+Sequel Ace
