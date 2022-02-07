@@ -92,6 +92,12 @@
     const processing = document.getElementById("processing-payment");
 
     stript = Stripe("aaaaa");
+
+    function hidePayButton() {
+      payButton.classList.add("d-none");
+      processing.classList.remove("d-none");
+    }
+
     function val() {
       let form = document.getElementById("charge_form");
       if (form.checkValidity() === false) {
