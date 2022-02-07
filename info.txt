@@ -11,3 +11,6 @@ mysql
 sudo mysql -u root
 
 Sequel Ace
+
+
+https://github.com/cosmtrek/air
