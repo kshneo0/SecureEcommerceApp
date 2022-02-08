@@ -14,8 +14,11 @@ func (app *application) routes() http.Handler {
 		AllowedOrigins: []string{"https://*", "http://*"},
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders: []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		MaxAge:         300,
+		// AllowCredentials: false,
+		MaxAge: 300,
 	}))
+
+	mux.Get("/api/payment-intent", app.GetPaymentIntent)
 
 	return mux
 }
