@@ -78,6 +78,12 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+
+    <input type="hidden" name="amount" id="amount" />
+    <input type="hidden" name="payment_intent" id="payment_intent" />
+    <input type="hidden" name="payment_method" id="payment_method" />
+    <input type="hidden" name="payment_amount" id="payment_amount" />
+    <input type="hidden" name="payment_currency" id="payment_currency" />
   </form>
 {{ end }}
 
@@ -108,6 +114,58 @@
       }
       form.classList.add("was-validated");
       hidePayButton();
+
+      let amountToCharge = document.getElementById("amount").value;
+
+      let payload = {
+        amount: amountToCharge,
+        currency: "cad",
+      };
+
+      const requestOptions = {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      };
+
+  fetch("{{.API}}/api/payment-intent", requestOptions)
+            .then(response => response.text())
+            .then(response => {
+                let data;
+                try {
+                    data = JSON.parse(response);
+                    stripe.confirmCardPayment(data.client_secret, {
+                        payment_method: {
+                            card: card,
+                            billing_details: {
+                                name: document.getElementById("cardholder-name").value,
+                            }
+                        }
+                    }).then(function(result) {
+                        if (result.error) {
+                            // card declined, or something went wrong with the card
+                            showCardError(result.error.message);
+                            showPayButtons();
+                        } else if(result.paymentIntent) {
+                            if (result.paymentIntent.status === "succeeded") {
+                                // we have charged the card
+                                processing.classList.add("d-none");
+                                showCardSuccess();
+                                {{/* document.getElementById("charge_form").submit(); */}}
+                                saveTransaction(result);
+                            }
+                        }
+                    })
+                } catch (err) {
+                    console.log(err);
+                    showCardError("Invalid response from payment gateway!");
+                    showPayButtons();
+                }
+            })
+
     }
 
     (function () {
