@@ -19,3 +19,4 @@ https://github.com/cosmtrek/air
 4000번 port 확인
 lsof -i :4000
 kill -9 
+
