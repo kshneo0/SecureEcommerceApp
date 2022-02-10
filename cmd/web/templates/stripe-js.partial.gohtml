@@ -55,7 +55,7 @@
       };
 
       const requestOptions = {
-        method: "post",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@
                             showPayButtons();
                         } else if(result.paymentIntent) {
                             if (result.paymentIntent.status === "succeeded") {
-                                  // we have charged the card
+                                // we have charged the card
                                 document.getElementById("payment_method").value = result.paymentIntent.payment_method;
                                 document.getElementById("payment_intent").value = result.paymentIntent.id;
                                 document.getElementById("payment_amount").value = result.paymentIntent.amount;
@@ -105,8 +105,6 @@
 
     (function () {
       // create stripe & elements
-
-/* stripe에 가입할 수 없어 주석처리
       const elements = stripe.elements();
       const style = {
         base: {
@@ -134,7 +132,6 @@
         }
       });
 
-      */
     })();
   </script>
 {{ end }}

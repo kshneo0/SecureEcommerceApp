@@ -23,6 +23,7 @@ type jsonResponse struct {
 
 // GetPaymentIntent gets a payment intent, and returns json (or error json)
 func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request) {
+
 	var payload stripePayload
 
 	err := json.NewDecoder(r.Body).Decode(&payload)

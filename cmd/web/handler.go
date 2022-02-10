@@ -8,6 +8,14 @@ import (
 	"github.com/secureEcommerceApp/internal/cards"
 )
 
+// Home displays the home page
+func (app *application) Home(w http.ResponseWriter, r *http.Request) {
+	if err := app.renderTemplate(w, r, "home", &templateData{}); err != nil {
+		app.errorLog.Println(err)
+	}
+}
+
+// VirtualTerminal displays the virtual terminal page
 func (app *application) VirtualTerminal(w http.ResponseWriter, r *http.Request) {
 
 	if err := app.renderTemplate(w, r, "terminal", &templateData{}, "stripe-js"); err != nil {
@@ -52,8 +60,14 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	expiryMonth := pm.Card.ExpMonth
 	expiryYear := pm.Card.ExpYear
 
+	// create a new customer
+
+	// create a new order
+
+	// create a new transaction
+
 	data := make(map[string]interface{})
-	data["cardHolder"] = cardHolder
+	data["cardholder"] = cardHolder
 	data["email"] = email
 	data["pi"] = paymentIntent
 	data["pm"] = paymentMethod
@@ -64,12 +78,13 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	data["expiry_year"] = expiryYear
 	data["bank_return_code"] = pi.Charges.Data[0].ID
 
+	// should write this data to session, and then redirect user to new page
+	app.infoLog.Println(data)
 	if err := app.renderTemplate(w, r, "succeeded", &templateData{
 		Data: data,
 	}); err != nil {
 		app.errorLog.Println(err)
 	}
-
 }
 
 // ChargeOnce displays the page to buy one widget
