@@ -20,3 +20,4 @@ https://github.com/cosmtrek/air
 lsof -i :4000
 kill -9 
 
+make stop;make start
