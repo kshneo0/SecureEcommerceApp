@@ -14,7 +14,23 @@
     class="image-fluid rounded mx-auto d-block"
   />
 
-  <div class="alert alert-danger text-center d-none" id="card-messages"></div>
+  <hr />
+  <a
+    id="test-success"
+    href="javascript:void(0)"
+    class="btn btn-primary"
+    onclick="test(this.id)"
+    >Success</a
+  >
+  <a
+    id="test-fail"
+    href="javascript:void(0)"
+    class="btn btn-primary"
+    onclick="test(this.id)"
+    >Fail</a
+  >
+  <hr />
+
   <div class="alert alert-danger text-center d-none" id="card-messages"></div>
 
   <form
@@ -28,7 +44,8 @@
   >
     <input type="hidden" name="product_id" value="{{ $widget.ID }}" />
     <h3 class="mt-2 text-center mb-3">
-      {{ $widget.Name }}: {{ formatCurrency $widget.Price }}
+      {{ $widget.Name }}:
+      {{ formatCurrency $widget.Price }}
     </h3>
     <p>{{ $widget.Description }}</p>
 
@@ -103,4 +120,14 @@
 
 {{ define "js" }}
   {{ template "stripe-js" . }}
+  <script>
+    function test(id) {
+      console.log(id);
+      if (id === "test-success") {
+        document.getElementById("charge_amount").value = 1000;
+      } else {
+        
+      }
+    }
+  </script>
 {{ end }}
