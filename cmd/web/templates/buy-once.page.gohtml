@@ -50,19 +50,31 @@
     <p>{{ $widget.Description }}</p>
 
     <div class="mb-3">
-      <label for="cardholder-name" class="form-label">Cardholder Name</label>
+      <label for="first-name" class="form-label">First Name</label>
       <input
         type="text"
         class="form-control"
-        id="cardholder-name"
-        name="cardholder_name"
+        id="first-name"
+        name="first_name"
         required=""
-        autocomplete="cardholder-name-new"
+        autocomplete="first-name-new"
       />
     </div>
 
     <div class="mb-3">
-      <label for="cardholder-email" class="form-label">Cardholder Email</label>
+      <label for="last-name" class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cardholder-name"
+        name="last_name"
+        required=""
+        autocomplete="last-name-new"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="cardholder-email" class="form-label">Email</label>
       <input
         type="email"
         class="form-control"
@@ -70,6 +82,18 @@
         name="email"
         required=""
         autocomplete="cardholder-email-new"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="cardholder-name" class="form-label">Name on Card</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cardholder-name"
+        name="cardholder_name"
+        required=""
+        autocomplete="cardholder-name-new"
       />
     </div>
 
@@ -114,8 +138,15 @@
       console.log(id);
       if (id === "test-success") {
         document.getElementById("amount").value = "1000";
-        document.getElementById("cardholder-name").value = "Jack Jones";
+        document.getElementById("first-name").value = "Jones";
+        document.getElementById("last-name").value = "Jack";
         document.getElementById("cardholder-email").value = "jack@jones.com";
+        
+        
+        // document.getElementsByName("cardnumber")[0].value =
+        //   "4242 4242 4242 4242";
+        // document.getElementsByName("exp-date")[0].value = "01 / 29";
+        // document.getElementsByName("cvc")[0].value = "333";
       }
     }
   </script>
