@@ -33,7 +33,7 @@ build_back:
 	@echo "Back end built!"
 
 ## start: starts front and back end
-start: start_front start_back start_invoice
+start: start_front start_back #start_invoice
 
 ## start_invoice: starts the invoice microservice
 start_invoice: build_invoice

@@ -7,6 +7,7 @@ https://stripe.com/
 brew install mariadb
 mysql.server start
 brew services start mariadb
+brew services restart mariadb
 mysql
 sudo mysql -u root
 

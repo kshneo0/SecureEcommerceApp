@@ -9,4 +9,7 @@ require (
 	github.com/stripe/stripe-go/v72 v72.86.0
 )
 
-require gopkg.in/yaml.v2 v2.3.0 // indirect
+require (
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
+)
