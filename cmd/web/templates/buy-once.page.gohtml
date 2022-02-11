@@ -66,7 +66,7 @@
       <input
         type="text"
         class="form-control"
-        id="cardholder-name"
+        id="last-name"
         name="last_name"
         required=""
         autocomplete="last-name-new"
@@ -138,11 +138,11 @@
       console.log(id);
       if (id === "test-success") {
         document.getElementById("amount").value = "1000";
-        document.getElementById("first-name").value = "Jones";
-        document.getElementById("last-name").value = "Jack";
+        document.getElementById("first-name").value = "Jack";
+        document.getElementById("last-name").value = "Jones";
         document.getElementById("cardholder-email").value = "jack@jones.com";
-        
-        
+        document.getElementById("cardholder-name").value = "Jack Jones";
+
         // document.getElementsByName("cardnumber")[0].value =
         //   "4242 4242 4242 4242";
         // document.getElementsByName("exp-date")[0].value = "01 / 29";
