@@ -4,6 +4,12 @@
   Login
 {{ end }}
 
+{{ template "base" . }}
+
+{{ define "title" }}
+  Login
+{{ end }}
+
 {{define "content"}}
 <div class="row">
 <div class="col-md-6 offset-md-3">
@@ -47,8 +53,72 @@
 <script>
 
 function val() {
-    
+    let form = document.getElementById("login_form");
+    if (form.checkValidity() === false) {
+        this.event.preventDefault();
+        this.event.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+    }
+    form.classList.add("was-validated");
+
+    let payload = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+    }
+
+    const requestOptions = {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
+    }
+
+    fetch("{{.API}}/api/authenticate", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
 }
 
 </script>
 {{end}}
+
+{{ define "js" }}
+<script>
+
+function val() {
+    let form = document.getElementById("login_form");
+    if (form.checkValidity() === false) {
+        this.event.preventDefault();
+        this.event.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+    }
+    form.classList.add("was-validated");
+
+    let payload = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+    }
+
+    const requestOptions = {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload),
+    }
+
+    fetch("{{.API}}/api/authenticate", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+}
+
+</script>
+{{ end }}
