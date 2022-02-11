@@ -160,7 +160,6 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	http.Redirect(w, r, "/receipt", http.StatusSeeOther)
 }
 
-
 // VirtualTerminalPaymentSucceeded displays the receipt page for virtual terminal transactions
 func (app *application) VirtualTerminalPaymentSucceeded(w http.ResponseWriter, r *http.Request) {
 	txnData, err := app.GetTransactionData(r)
@@ -269,5 +268,17 @@ func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
 		Data: data,
 	}, "stripe-js"); err != nil {
 		app.errorLog.Println(err)
+	}
+}
+
+// BronzePlan displays the bronze plan page
+func (app *application) BronzePlan(w http.ResponseWriter, r *http.Request) {
+	intMap := make(map[string]int)
+	intMap["plan_id"] = 1
+
+	if err := app.renderTemplate(w, r, "bronze-plan", &templateData{
+		IntMap: intMap,
+	}); err != nil {
+		app.errorLog.Print(err)
 	}
 }
