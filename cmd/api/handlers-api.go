@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/secureEcommerceApp/internal/cards"
+	"github.com/stripe/stripe-go/v72"
 )
 
 type stripePayload struct {
@@ -14,8 +15,14 @@ type stripePayload struct {
 	Amount        string `json:"amount"`
 	PaymentMethod string `json:"payment_method"`
 	Email         string `json:"email"`
+	CardBrand     string `json:"card_brand"`
+	ExpiryMonth   int    `json:"exp_month"`
+	ExpiryYear    int    `json:"exp_year"`
 	LastFour      string `json:"last_four"`
 	Plan          string `json:"plan"`
+	ProductID     string `json:"product_id"`
+	FirstName     string `json:"first_name"`
+	LastName      string `json:"last_name"`
 }
 
 type jsonResponse struct {
@@ -120,19 +127,28 @@ func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, 
 		Currency: data.Currency,
 	}
 
+	okay := true
+	var subscription *stripe.Subscription
+
 	stripeCustomer, msg, err := card.CreateCustomer(data.PaymentMethod, data.Email)
 	if err != nil {
 		app.errorLog.Println(err)
+		okay = false
 	}
 
-	subscriptionID, err := card.SubscribeToPlan(stripeCustomer, data.Plan, data.Email, data.LastFour, "")
-	if err != nil {
-		app.errorLog.Println(err)
+	if okay {
+		subscription, err = card.SubscribeToPlan(stripeCustomer, data.Plan, data.Email, data.LastFour, "")
+		if err != nil {
+			app.errorLog.Println(err)
+			okay = false
+		}
+
+		app.infoLog.Println("subscription id is", subscription.ID)
 	}
 
-	app.infoLog.Println("subscription id is", subscriptionID)
-
-	okay := true
+	if okay {
+		
+	}
 	// msg := ""
 
 	resp := jsonResponse{
