@@ -11,4 +11,7 @@ require (
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 )
 
-require gopkg.in/yaml.v2 v2.3.0 // indirect
+require (
+	github.com/alexedwards/scs/mysqlstore v0.0.0-20220209195334-b122fe6452fc // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
+)
