@@ -1,14 +1,8 @@
-{{ template "base" . }}
+{{template "base" .}}
 
-{{ define "title" }}
-  Login
-{{ end }}
-
-{{ template "base" . }}
-
-{{ define "title" }}
-  Login
-{{ end }}
+{{define "title"}}
+    Login
+{{end}}
 
 {{define "content"}}
 <div class="row">
@@ -27,13 +21,13 @@
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email"
-            required="" autocomplete="email-new">
+            required="" autocomplete="email-new" value="me@here.com">
     </div>
 
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password"
-            required="" autocomplete="password-new">
+            required="" autocomplete="password-new" value="password">
     </div>
 
     <hr>
@@ -85,40 +79,3 @@ function val() {
 
 </script>
 {{end}}
-
-{{ define "js" }}
-<script>
-
-function val() {
-    let form = document.getElementById("login_form");
-    if (form.checkValidity() === false) {
-        this.event.preventDefault();
-        this.event.stopPropagation();
-        form.classList.add("was-validated");
-        return;
-    }
-    form.classList.add("was-validated");
-
-    let payload = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
-    }
-
-    const requestOptions = {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload),
-    }
-
-    fetch("{{.API}}/api/authenticate", requestOptions)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-}
-
-</script>
-{{ end }}
