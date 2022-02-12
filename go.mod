@@ -13,5 +13,6 @@ require (
 
 require (
 	github.com/alexedwards/scs/mysqlstore v0.0.0-20220209195334-b122fe6452fc // indirect
+	github.com/xhit/go-simple-mail/v2 v2.10.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
