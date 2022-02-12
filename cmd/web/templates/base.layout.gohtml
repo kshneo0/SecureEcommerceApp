@@ -94,10 +94,10 @@
 
         document.addEventListener("DOMContentLoaded", function() {
           if (localStorage.getItem("token") !== null) {
-            loginLink.innerHTML = '<a class="nav-link" onclick="logout()" href="#!">Logout</a></li>';
+            loginLink.innerHTML = '<a class="nav-link" onclick="logout()" href="#!">Logout</a>';
             vtLink.classList.remove("d-none");
           } else {
-            loginLink.innerHTML = '<a class="nav-link" href="/login">Login</a></li>';
+            loginLink.innerHTML = '<a class="nav-link" href="/login">Login</a>';
           }
           loginLink.classList.remove("d-none");
         })
@@ -107,7 +107,7 @@
           localStorage.removeItem("token_expiry");
           location.href = "/login";
         }
-        
+
         function checkAuth() {
           if (localStorage.getItem("token") === null) {
             location.href = "/login";
