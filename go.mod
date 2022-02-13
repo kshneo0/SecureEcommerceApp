@@ -13,6 +13,7 @@ require (
 	github.com/phpdave11/gofpdf v1.4.2
 	github.com/stripe/stripe-go/v72 v72.86.0
 	github.com/xhit/go-simple-mail v2.2.2+incompatible
+	github.com/xhit/go-simple-mail/v2 v2.10.0
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 )
 

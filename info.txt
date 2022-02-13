@@ -21,6 +21,7 @@ lsof -i :4000
 kill -9 
 
 make stop;make start
+make stop_invoice;make start_invoice
 
 https://mailtrap.io/
 https://github.com/bwmarrin/go-alone
