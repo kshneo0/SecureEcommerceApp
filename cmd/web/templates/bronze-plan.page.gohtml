@@ -212,7 +212,7 @@ let card;
             fetch("{{.API}}/api/create-customer-and-subscribe-to-plan", requestOptions)
             .then(response => response.json())
             .then(function(data) {
-                console.log(data)
+              if (data.error === false) {
                 processing.classList.add("d-none");
                 showCardSuccess();
                 sessionStorage.first_name = document.getElementById("first_name").value;
@@ -221,6 +221,19 @@ let card;
                 sessionStorage.last_four = result.paymentMethod.card.last4;
 
                 location.href = "/receipt/bronze";
+              } else {
+                document.getElementById("charge_form").classList.remove("was-validated");
+
+                Object.entries(data.errors).forEach((i) => {
+                    const [key, value] = i;
+                    console.log(`${key}: ${value}`);
+                    document.getElementById(key).classList.add("is-invalid");
+                    document.getElementById(key + "-help").classList.remove("valid-feedback");
+                    document.getElementById(key + "-help").classList.add("invalid-feedback");
+                    document.getElementById(key + "-help").innerText = value;
+                })
+                showPayButtons();
+              }
 
             })
         }
