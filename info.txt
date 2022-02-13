@@ -25,3 +25,5 @@ make stop;make start
 https://mailtrap.io/
 https://github.com/bwmarrin/go-alone
 https://sweetalert2.github.io/
+
+go get github.com/gorilla/websocket  
