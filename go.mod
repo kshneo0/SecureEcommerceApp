@@ -16,6 +16,7 @@ require (
 require (
 	github.com/bwmarrin/go-alone v0.0.0-20190806015146-742bb55d1631 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/phpdave11/gofpdf v1.4.2 // indirect
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
