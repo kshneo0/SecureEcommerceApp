@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -8,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/secureEcommerceApp/internal/cards"
 	"github.com/secureEcommerceApp/internal/models"
+	"github.com/secureEcommerceApp/internal/urlsigner"
 )
 
 // Home displays the home page
@@ -338,4 +340,24 @@ func (app *application) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 	if err := app.renderTemplate(w, r, "forgot-password", &templateData{}); err != nil {
 		app.errorLog.Print(err)
 	}
+}
+
+// ShowResetPassword shows the reset password page (and validates url integrity)
+func (app *application) ShowResetPassword(w http.ResponseWriter, r *http.Request) {
+
+	theURL := r.RequestURI
+	testURL := fmt.Sprintf("%s%s", app.config.frontend, theURL)
+
+	signer := urlsigner.Signer{
+		Secret: []byte(app.config.secretkey),
+	}
+
+	valid := signer.VerifyToken(testURL)
+
+	if valid {
+		w.Write([]byte("valid"))
+	} else {
+		w.Write([]byte("invalid"))
+	}
+
 }
