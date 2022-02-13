@@ -15,7 +15,6 @@
         <th>Customer</th>
         <th>Product</th>
         <th>Amount</th>
-        <th>Status</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -40,7 +39,25 @@
     fetch("{{.API}}/api/admin/all-sales", requestOptions)
     .then(response => response.json())
     .then(function (data) {
-        console.log(data);
+
+      data.forEach(function(i) {
+        let newRow = tbody.insertRow();
+        let newCell = newRow.insertCell();
+
+        newCell.innerHTML = `<a href="/admin/sales/${i.id}">Order ${i.id}</a>`;
+
+        newCell = newRow.insertCell();
+        let item = document.createTextNode(i.customer.last_name + ", " + i.customer.first_name);
+        newCell.appendChild(item);
+
+        newCell = newRow.insertCell();
+        item = document.createTextNode(i.widget.name);
+        newCell.appendChild(item);
+
+        newCell = newRow.insertCell();
+        item = document.createTextNode(i.transaction.amount);
+        newCell.appendChild(item);
+      })
     })
 </script>
 {{ end }}
