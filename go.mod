@@ -13,4 +13,8 @@ require (
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 )
 
-require gopkg.in/yaml.v2 v2.3.0 // indirect
+require (
+	github.com/bwmarrin/go-alone v0.0.0-20190806015146-742bb55d1631 // indirect
+	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
+)
