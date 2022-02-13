@@ -401,3 +401,20 @@ func (app *application) AllSubscriptions(w http.ResponseWriter, r *http.Request)
 		app.errorLog.Print(err)
 	}
 }
+
+// ShowSale shows one sale page
+func (app *application) ShowSale(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["title"] = "Sale"
+	stringMap["cancel"] = "/admin/all-sales"
+	stringMap["refund-url"] = "/api/admin/refund"
+	stringMap["refund-btn"] = "Refund Order"
+	stringMap["refunded-badge"] = "Refunded"
+	stringMap["refunded-msg"] = "Charge refunded"
+
+	if err := app.renderTemplate(w, r, "sale", &templateData{
+		StringMap: stringMap,
+	}); err != nil {
+		app.errorLog.Print(err)
+	}
+}

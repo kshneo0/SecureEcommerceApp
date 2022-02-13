@@ -39,8 +39,8 @@
     fetch("{{.API}}/api/admin/all-subscriptions", requestOptions)
     .then(response => response.json())
     .then(function (data) {
-        if (data.orders) {
-            data.orders.forEach(function(i) {
+        if (data) {
+            data.forEach(function(i) {
                 let newRow = tbody.insertRow();
                 let newCell = newRow.insertCell();
                 newCell.innerHTML = `<a href="/admin/subscriptions/${i.id}">Order ${i.id}</a>`;
@@ -67,5 +67,13 @@
             newCell.innerHTML = "No data available";
         }
     })
+
+    function formatCurrency(amount) {
+      let c = parseFloat(amount / 100);
+      return c.toLocaleString("en-CA", {
+          style: 'currency',
+          currency: 'CAD',
+      })
+    }
 </script>
 {{ end }}
