@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/secureEcommerceApp/internal/cards"
+	"github.com/secureEcommerceApp/internal/encryption"
 	"github.com/secureEcommerceApp/internal/models"
 	"github.com/secureEcommerceApp/internal/urlsigner"
 )
@@ -344,7 +345,7 @@ func (app *application) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 
 // ShowResetPassword shows the reset password page (and validates url integrity)
 func (app *application) ShowResetPassword(w http.ResponseWriter, r *http.Request) {
-
+	email := r.URL.Query().Get("email")
 	theURL := r.RequestURI
 	testURL := fmt.Sprintf("%s%s", app.config.frontend, theURL)
 
@@ -366,8 +367,18 @@ func (app *application) ShowResetPassword(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	encyrptor := encryption.Encryption{
+		Key: []byte(app.config.secretkey),
+	}
+
+	encryptedEmail, err := encyrptor.Encrypt(email)
+	if err != nil {
+		app.errorLog.Println("Encryption failed")
+		return
+	}
+
 	data := make(map[string]interface{})
-	data["email"] = r.URL.Query().Get("email")
+	data["email"] = encryptedEmail
 
 	if err := app.renderTemplate(w, r, "reset-password", &templateData{
 		Data: data,
