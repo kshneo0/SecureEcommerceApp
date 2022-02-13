@@ -26,6 +26,7 @@ func (app *application) routes() http.Handler {
 	mux.Post("/api/authenticate", app.CreateAuthToken)
 	mux.Post("/api/is-authenticated", app.CheckAuthentication)
 	mux.Post("/api/forgot-password", app.SendPasswordResetEmail)
+	mux.Post("/api/reset-password", app.ResetPassword)
 
 	mux.Route("/api/admin", func(mux chi.Router) {
 		mux.Use(app.Auth)
@@ -34,7 +35,7 @@ func (app *application) routes() http.Handler {
 			w.Write([]byte("got in"))
 		})
 
-			mux.Post("/virtual-terminal-succeeded", app.VirtualTerminalPaymentSucceeded)
+		mux.Post("/virtual-terminal-succeeded", app.VirtualTerminalPaymentSucceeded)
 	})
 
 	return mux
